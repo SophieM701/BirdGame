@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://qpc1mn4tfdrp"]
+
+[ext_resource type="FontFile" uid="uid://cioc26ifxaesr" path="res://Assets/Fonts/yummy nickels.ttf" id="1_ixce6"]
+[ext_resource type="Script" path="res://scenes/Prompt.gd" id="2_q0mqj"]
+[ext_resource type="Script" path="res://scenes/Executor.gd" id="3_4s3cj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2hyn2"]
+font = ExtResource("1_ixce6")
+font_size = 10
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Backdrop" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)
+
+[node name="Prompt" type="Label" parent="."]
+offset_top = 82.0
+offset_right = 320.0
+offset_bottom = 105.0
+text = "Left-Click to Begin"
+label_settings = SubResource("LabelSettings_2hyn2")
+horizontal_alignment = 1
+script = ExtResource("2_q0mqj")
+
+[node name="Executor" type="Node" parent="."]
+script = ExtResource("3_4s3cj")
