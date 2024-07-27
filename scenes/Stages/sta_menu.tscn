@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://qpc1mn4tfdrp"]
+[gd_scene load_steps=6 format=3 uid="uid://qpc1mn4tfdrp"]
 
 [ext_resource type="FontFile" uid="uid://cioc26ifxaesr" path="res://Assets/Fonts/yummy nickels.ttf" id="1_ixce6"]
 [ext_resource type="Script" path="res://scenes/Prompt.gd" id="2_q0mqj"]
 [ext_resource type="Script" path="res://scenes/Executor.gd" id="3_4s3cj"]
+[ext_resource type="PackedScene" uid="uid://vucuskvn41mq" path="res://scenes/Objects/Cursor/obj_cursor.tscn" id="4_not2k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2hyn2"]
 font = ExtResource("1_ixce6")
@@ -26,3 +27,5 @@ script = ExtResource("2_q0mqj")
 
 [node name="Executor" type="Node" parent="."]
 script = ExtResource("3_4s3cj")
+
+[node name="Cursor" parent="." instance=ExtResource("4_not2k")]
