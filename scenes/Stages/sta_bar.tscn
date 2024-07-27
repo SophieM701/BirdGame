@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxsbsx4i04i3m"]
+[gd_scene load_steps=10 format=3 uid="uid://dxsbsx4i04i3m"]
 
 [ext_resource type="FontFile" uid="uid://cioc26ifxaesr" path="res://Assets/Fonts/yummy nickels.ttf" id="1_nu84g"]
 [ext_resource type="PackedScene" uid="uid://vucuskvn41mq" path="res://scenes/Objects/Cursor/obj_cursor.tscn" id="2_2khhq"]
+[ext_resource type="AudioStream" uid="uid://djywvggg65y46" path="res://Assets/Sounds/Glass/sou_glassClink-001.ogg" id="2_2trep"]
+[ext_resource type="Script" path="res://scenes/Stages/obj_physicsObject.gd" id="2_b6xtm"]
 [ext_resource type="Script" path="res://scenes/Stages/Camera.gd" id="3_h0wtw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4feo3"]
@@ -12,6 +14,8 @@ font = ExtResource("1_nu84g")
 font_size = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hu75"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyd0q"]
 
 [node name="sta_bar" type="Node2D"]
 
@@ -74,40 +78,28 @@ offset_right = 360.0
 offset_bottom = 320.0
 color = Color(0.188235, 0.188235, 0.188235, 1)
 
-[node name="Cursor" parent="." instance=ExtResource("2_2khhq")]
-
-[node name="Camera" type="Camera2D" parent="Cursor"]
-position = Vector2(5, -5)
-limit_left = 0
-limit_top = 0
-limit_right = 360
-limit_bottom = 200
-position_smoothing_enabled = true
-position_smoothing_speed = 2.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.6
-drag_top_margin = 0.1
-drag_right_margin = 0.6
-drag_bottom_margin = 0.8
-script = ExtResource("3_h0wtw")
-
-[node name="Object" type="RigidBody2D" parent="."]
+[node name="obj_physicsObject" type="RigidBody2D" parent="."]
 position = Vector2(209, 30)
 mass = 0.14
+contact_monitor = true
+script = ExtResource("2_b6xtm")
 
-[node name="Placeholder" type="ColorRect" parent="Object"]
+[node name="Placeholder" type="ColorRect" parent="obj_physicsObject"]
 offset_right = 20.0
 offset_bottom = 20.0
 color = Color(0.74902, 1, 1, 1)
 
-[node name="Collision" type="CollisionShape2D" parent="Object"]
+[node name="Collision" type="CollisionShape2D" parent="obj_physicsObject"]
 position = Vector2(10, 10)
 shape = SubResource("RectangleShape2D_0hu75")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="obj_physicsObject"]
+stream = ExtResource("2_2trep")
+
 [node name="Object2" type="RigidBody2D" parent="."]
 position = Vector2(193, 95)
-mass = 0.14
+mass = 0.06
+gravity_scale = 0.7
 
 [node name="Placeholder" type="ColorRect" parent="Object2"]
 offset_right = 20.0
@@ -117,3 +109,23 @@ color = Color(0.74902, 1, 1, 1)
 [node name="Collision" type="CollisionShape2D" parent="Object2"]
 position = Vector2(10, 10)
 shape = SubResource("RectangleShape2D_0hu75")
+
+[node name="Cursor" parent="." instance=ExtResource("2_2khhq")]
+
+[node name="Camera" type="Camera2D" parent="Cursor"]
+position = Vector2(5, -5)
+limit_left = 0
+limit_top = 0
+limit_right = 360
+limit_bottom = 200
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
+script = ExtResource("3_h0wtw")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(229, 142)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_uyd0q")
+
+[connection signal="body_entered" from="obj_physicsObject" to="obj_physicsObject" method="_on_body_entered"]
