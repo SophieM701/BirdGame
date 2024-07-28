@@ -1,21 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxsbsx4i04i3m"]
+[gd_scene load_steps=9 format=3 uid="uid://dxsbsx4i04i3m"]
 
 [ext_resource type="FontFile" uid="uid://cioc26ifxaesr" path="res://Assets/Fonts/yummy nickels.ttf" id="1_nu84g"]
 [ext_resource type="PackedScene" uid="uid://vucuskvn41mq" path="res://scenes/Objects/Cursor/obj_cursor.tscn" id="2_2khhq"]
-[ext_resource type="AudioStream" uid="uid://djywvggg65y46" path="res://Assets/Sounds/Glass/sou_glassClink-001.ogg" id="2_2trep"]
-[ext_resource type="Script" path="res://scenes/Stages/obj_physicsObject.gd" id="2_b6xtm"]
+[ext_resource type="PackedScene" uid="uid://ckkgcksh6ikyq" path="res://scenes/Objects/PhysicsObjects/obj_physics_object.tscn" id="2_baej7"]
 [ext_resource type="Script" path="res://scenes/Stages/Camera.gd" id="3_h0wtw"]
+[ext_resource type="Script" path="res://scenes/Stages/Arrow.gd" id="5_86u7f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4feo3"]
 size = Vector2(360, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hu75"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_6rgl8"]
 font = ExtResource("1_nu84g")
 font_size = 10
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hu75"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyd0q"]
 
 [node name="sta_bar" type="Node2D"]
 
@@ -45,32 +43,12 @@ position = Vector2(0, 11)
 position = Vector2(180, 5)
 shape = SubResource("RectangleShape2D_4feo3")
 
-[node name="Patron" type="ColorRect" parent="."]
+[node name="Patron01" type="ColorRect" parent="."]
 offset_left = 71.0
 offset_top = 81.0
 offset_right = 128.0
 offset_bottom = 138.0
-
-[node name="DialogueBox" type="ColorRect" parent="."]
-offset_top = -62.0
-offset_right = 360.0
-offset_bottom = -17.0
-color = Color(0.737255, 0.737255, 0.737255, 1)
-
-[node name="Label" type="Label" parent="DialogueBox"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 9.0
-offset_right = 79.0
-offset_bottom = 32.0
-text = "I am a bird."
-label_settings = SubResource("LabelSettings_6rgl8")
-
-[node name="Polygon2D" type="Polygon2D" parent="DialogueBox"]
-position = Vector2(76, 45)
-scale = Vector2(0.116279, 0.254545)
-color = Color(0.734375, 0.734375, 0.734375, 1)
-polygon = PackedVector2Array(0, 0, 86, 39.2857, 86, 0)
+color = Color(1, 0.701961, 0.301961, 1)
 
 [node name="UnderCounter" type="ColorRect" parent="."]
 offset_top = 173.0
@@ -78,23 +56,8 @@ offset_right = 360.0
 offset_bottom = 320.0
 color = Color(0.188235, 0.188235, 0.188235, 1)
 
-[node name="obj_physicsObject" type="RigidBody2D" parent="."]
-position = Vector2(209, 30)
-mass = 0.14
-contact_monitor = true
-script = ExtResource("2_b6xtm")
-
-[node name="Placeholder" type="ColorRect" parent="obj_physicsObject"]
-offset_right = 20.0
-offset_bottom = 20.0
-color = Color(0.74902, 1, 1, 1)
-
-[node name="Collision" type="CollisionShape2D" parent="obj_physicsObject"]
-position = Vector2(10, 10)
-shape = SubResource("RectangleShape2D_0hu75")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="obj_physicsObject"]
-stream = ExtResource("2_2trep")
+[node name="obj_physics_object" parent="." instance=ExtResource("2_baej7")]
+position = Vector2(208, 53)
 
 [node name="Object2" type="RigidBody2D" parent="."]
 position = Vector2(193, 95)
@@ -110,6 +73,30 @@ color = Color(0.74902, 1, 1, 1)
 position = Vector2(10, 10)
 shape = SubResource("RectangleShape2D_0hu75")
 
+[node name="Arrow" type="Polygon2D" parent="."]
+position = Vector2(0, 29)
+scale = Vector2(0.116279, 0.254545)
+color = Color(0.734375, 0.734375, 0.734375, 1)
+polygon = PackedVector2Array(0, 0, 42.6327, 19.4751, 86, 39.2857, 86, 0)
+script = ExtResource("5_86u7f")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" type="ColorRect" parent="UI"]
+offset_top = 1.0
+offset_right = 320.0
+offset_bottom = 29.0
+color = Color(0.737255, 0.737255, 0.737255, 1)
+
+[node name="Label" type="Label" parent="UI/DialogueBox"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 73.0
+offset_bottom = 18.0
+text = "I am a bird."
+label_settings = SubResource("LabelSettings_6rgl8")
+
 [node name="Cursor" parent="." instance=ExtResource("2_2khhq")]
 
 [node name="Camera" type="Camera2D" parent="Cursor"]
@@ -121,11 +108,3 @@ limit_bottom = 200
 position_smoothing_enabled = true
 position_smoothing_speed = 1.0
 script = ExtResource("3_h0wtw")
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(229, 142)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_uyd0q")
-
-[connection signal="body_entered" from="obj_physicsObject" to="obj_physicsObject" method="_on_body_entered"]
