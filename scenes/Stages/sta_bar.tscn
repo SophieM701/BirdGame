@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dxsbsx4i04i3m"]
+[gd_scene load_steps=13 format=3 uid="uid://dxsbsx4i04i3m"]
 
 [ext_resource type="Script" path="res://scenes/Stages/GameState.gd" id="1_2p7kn"]
 [ext_resource type="FontFile" uid="uid://cioc26ifxaesr" path="res://Assets/Fonts/yummy nickels.ttf" id="1_nu84g"]
 [ext_resource type="PackedScene" uid="uid://vucuskvn41mq" path="res://scenes/Objects/Cursor/obj_cursor.tscn" id="2_2khhq"]
+[ext_resource type="Texture2D" uid="uid://b7sjiovcp4yo5" path="res://Assets/Sprites/Enviornment/spr_envirnoment.png" id="2_6u5ly"]
 [ext_resource type="PackedScene" uid="uid://ckkgcksh6ikyq" path="res://scenes/Objects/PhysicsObjects/obj_physics_object.tscn" id="2_baej7"]
 [ext_resource type="Script" path="res://scenes/Stages/Camera.gd" id="3_h0wtw"]
 [ext_resource type="Script" path="res://scenes/Stages/Arrow.gd" id="5_86u7f"]
@@ -11,105 +12,71 @@
 size = Vector2(360, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k43fb"]
-size = Vector2(360, 4)
+size = Vector2(360, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8mv37"]
-size = Vector2(359, 5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hu75"]
+size = Vector2(359, 4.5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_6rgl8"]
 font = ExtResource("1_nu84g")
 font_size = 10
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvw60"]
+size = Vector2(360, 10)
+
 [node name="sta_bar" type="Node2D"]
+position = Vector2(-1, -1)
 
 [node name="GameState" type="Node" parent="."]
 script = ExtResource("1_2p7kn")
 
+[node name="Env" type="Sprite2D" parent="."]
+position = Vector2(181, 161)
+texture = ExtResource("2_6u5ly")
+
 [node name="Backdrop" type="ColorRect" parent="."]
+visible = false
 offset_right = 360.0
 offset_bottom = 320.0
 color = Color(0, 0, 0, 1)
 
-[node name="CounterTop" type="ColorRect" parent="."]
-offset_top = 146.0
-offset_right = 360.0
-offset_bottom = 173.0
-color = Color(0.737255, 0.737255, 0.737255, 1)
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1, 123)
 
-[node name="Sink" type="ColorRect" parent="CounterTop"]
-layout_mode = 0
-offset_left = 287.0
-offset_top = 5.0
-offset_right = 342.0
-offset_bottom = 21.0
-color = Color(0.2, 0.2, 0.2, 1)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="CounterTop"]
-position = Vector2(0, 11)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CounterTop/StaticBody2D"]
-position = Vector2(180, 8)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(180, 15)
 shape = SubResource("RectangleShape2D_4feo3")
 
 [node name="Patron01" type="ColorRect" parent="."]
+visible = false
 offset_left = 71.0
 offset_top = 81.0
 offset_right = 128.0
 offset_bottom = 138.0
 color = Color(1, 0.701961, 0.301961, 1)
 
-[node name="UnderCounter" type="ColorRect" parent="."]
-offset_top = 173.0
-offset_right = 360.0
-offset_bottom = 320.0
-color = Color(0.188235, 0.188235, 0.188235, 1)
+[node name="Physics" type="StaticBody2D" parent="."]
+position = Vector2(0, 259)
 
-[node name="UpperShelf" type="ColorRect" parent="UnderCounter"]
-layout_mode = 0
-offset_top = 86.0
-offset_right = 360.0
-offset_bottom = 94.0
-color = Color(0.734375, 0.734375, 0.734375, 1)
-
-[node name="Physics" type="RigidBody2D" parent="UnderCounter/UpperShelf"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UnderCounter/UpperShelf/Physics"]
-position = Vector2(180, 6)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Physics"]
+position = Vector2(180, -45)
 shape = SubResource("RectangleShape2D_k43fb")
 
-[node name="LowerShelf" type="ColorRect" parent="UnderCounter"]
-layout_mode = 0
-offset_top = 138.0
-offset_right = 360.0
-offset_bottom = 147.0
-color = Color(0.734375, 0.734375, 0.734375, 1)
+[node name="RigidBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 311)
 
-[node name="RigidBody2D" type="RigidBody2D" parent="UnderCounter/LowerShelf"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UnderCounter/LowerShelf/RigidBody2D"]
-position = Vector2(180.5, 6.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(180, -49)
 shape = SubResource("RectangleShape2D_8mv37")
 
 [node name="obj_physics_object" parent="." instance=ExtResource("2_baej7")]
 position = Vector2(218, 58)
 
-[node name="Object2" type="RigidBody2D" parent="."]
-position = Vector2(193, 95)
-mass = 0.06
-gravity_scale = 0.7
-
-[node name="Placeholder" type="ColorRect" parent="Object2"]
-offset_right = 20.0
-offset_bottom = 20.0
-color = Color(0.74902, 1, 1, 1)
-
-[node name="Collision" type="CollisionShape2D" parent="Object2"]
-position = Vector2(10, 10)
-shape = SubResource("RectangleShape2D_0hu75")
+[node name="obj_physics_object2" parent="." instance=ExtResource("2_baej7")]
+position = Vector2(203, 113)
 
 [node name="Arrow" type="Polygon2D" parent="."]
+visible = false
 position = Vector2(0, 29)
 scale = Vector2(0.116279, 0.254545)
 color = Color(0.734375, 0.734375, 0.734375, 1)
@@ -117,9 +84,9 @@ polygon = PackedVector2Array(0, 0, 42.6327, 19.4751, 86, 39.2857, 86, 0)
 script = ExtResource("5_86u7f")
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="DialogueBox" type="ColorRect" parent="UI"]
-offset_top = 1.0
 offset_right = 320.0
 offset_bottom = 29.0
 color = Color(0.737255, 0.737255, 0.737255, 1)
@@ -133,14 +100,21 @@ offset_bottom = 18.0
 text = "I am a bird."
 label_settings = SubResource("LabelSettings_6rgl8")
 
-[node name="Cursor" parent="." instance=ExtResource("2_2khhq")]
-
-[node name="Camera" type="Camera2D" parent="Cursor"]
-position = Vector2(5, -5)
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(27, 0)
+anchor_mode = 0
 limit_left = 0
 limit_top = 0
 limit_right = 360
-limit_bottom = 180
 position_smoothing_enabled = true
-position_smoothing_speed = 1.0
 script = ExtResource("3_h0wtw")
+
+[node name="Cursor" parent="." instance=ExtResource("2_2khhq")]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(180, 149)
+shape = SubResource("RectangleShape2D_kvw60")
+
+[connection signal="mouse_entered" from="Area2D" to="Camera" method="_on_area_2d_mouse_entered"]

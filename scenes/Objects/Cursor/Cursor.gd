@@ -15,5 +15,5 @@ func _process(delta):
 	# Follow invisible cursor
 	position.x = get_global_mouse_position().x
 	position.y = get_global_mouse_position().y
-	
-	pass
+
+
