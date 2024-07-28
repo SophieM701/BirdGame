@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxsbsx4i04i3m"]
+[gd_scene load_steps=12 format=3 uid="uid://dxsbsx4i04i3m"]
 
 [ext_resource type="Script" path="res://scenes/Stages/GameState.gd" id="1_2p7kn"]
 [ext_resource type="FontFile" uid="uid://cioc26ifxaesr" path="res://Assets/Fonts/yummy nickels.ttf" id="1_nu84g"]
@@ -8,7 +8,13 @@
 [ext_resource type="Script" path="res://scenes/Stages/Arrow.gd" id="5_86u7f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4feo3"]
-size = Vector2(360, 10)
+size = Vector2(360, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k43fb"]
+size = Vector2(360, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mv37"]
+size = Vector2(359, 5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hu75"]
 
@@ -44,7 +50,7 @@ color = Color(0.2, 0.2, 0.2, 1)
 position = Vector2(0, 11)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CounterTop/StaticBody2D"]
-position = Vector2(180, 5)
+position = Vector2(180, 8)
 shape = SubResource("RectangleShape2D_4feo3")
 
 [node name="Patron01" type="ColorRect" parent="."]
@@ -60,22 +66,34 @@ offset_right = 360.0
 offset_bottom = 320.0
 color = Color(0.188235, 0.188235, 0.188235, 1)
 
-[node name="ColorRect" type="ColorRect" parent="UnderCounter"]
-layout_mode = 0
-offset_top = 138.0
-offset_right = 360.0
-offset_bottom = 147.0
-color = Color(0.734375, 0.734375, 0.734375, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="UnderCounter"]
+[node name="UpperShelf" type="ColorRect" parent="UnderCounter"]
 layout_mode = 0
 offset_top = 86.0
 offset_right = 360.0
 offset_bottom = 94.0
 color = Color(0.734375, 0.734375, 0.734375, 1)
 
+[node name="Physics" type="RigidBody2D" parent="UnderCounter/UpperShelf"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnderCounter/UpperShelf/Physics"]
+position = Vector2(180, 6)
+shape = SubResource("RectangleShape2D_k43fb")
+
+[node name="LowerShelf" type="ColorRect" parent="UnderCounter"]
+layout_mode = 0
+offset_top = 138.0
+offset_right = 360.0
+offset_bottom = 147.0
+color = Color(0.734375, 0.734375, 0.734375, 1)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="UnderCounter/LowerShelf"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnderCounter/LowerShelf/RigidBody2D"]
+position = Vector2(180.5, 6.5)
+shape = SubResource("RectangleShape2D_8mv37")
+
 [node name="obj_physics_object" parent="." instance=ExtResource("2_baej7")]
-position = Vector2(208, 53)
+position = Vector2(218, 58)
 
 [node name="Object2" type="RigidBody2D" parent="."]
 position = Vector2(193, 95)
