@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Ambient Music 1.mp3-d46b975ac76dc1d2a3c3ec718
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

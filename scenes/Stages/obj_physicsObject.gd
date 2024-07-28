@@ -3,9 +3,11 @@ extends RigidBody2D
 # Local variables
 var canGrab = false
 var grabbed = false
+var pouring = false
+var rotTar = 0.0
 
-@onready var collideSound = $AudioStreamPlayer2D
-@onready var colorRect = $Placeholder
+@onready var collideSound = $CollideSound
+@onready var pourSound = $PourSound
 @onready var collision = $Collision
 
 
@@ -28,11 +30,31 @@ func _process(delta):
 		
 	# If currently grabbed, follow cursor
 	if grabbed:
+		rotation = lerp(rotation,rotTar,0.2) 
 		position.x = get_global_mouse_position().x
 		position.y = get_global_mouse_position().y
 		freeze = true
 	else:
 		freeze = false
+		
+	# Update pouring
+	if grabbed && Input.is_action_pressed("Right-Click"):
+		pouring = true
+	else:
+		pouring = false
+		
+	# Pour Sound
+	if grabbed && Input.is_action_just_pressed("Right-Click"):
+		pourSound.play()
+	if grabbed && Input.is_action_just_released("Right-Click"):
+		pourSound.stop()
+		
+	# Update rotation target
+	if pouring:
+		rotTar = deg_to_rad(45)
+	else:
+		rotTar = 0.0
+		
 
 # Play sound on collision
 func _on_body_entered(body):
