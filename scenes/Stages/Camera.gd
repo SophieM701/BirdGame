@@ -1,7 +1,11 @@
 extends Camera2D
 
-var wait = 30
-var topside = true
+# Env variables
+enum{ ABOVE, TRANSD, BELOW, TRANSU }
+var cameraState = ABOVE
+var transitionTimer = 30
+
+@onready var cursor = $"../Cursor"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,8 +15,38 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	# Activate limit smoothing after two frames
-	wait -= 1
-	if wait <= 0:
-		#limit_smoothed = true
+	# Follow cursor
+	position.x  = cursor.global_position.x/9
 	
+	# Bahavior based on cameraState
+	match cameraState:
+		ABOVE:
+			pass
+			
+		TRANSD:
+			position.y = 100
+			if transitionTimer:
+				transitionTimer -= 1
+			else:
+				cameraState = BELOW
+				transitionTimer = 30
+			
+		BELOW:
+			pass
+			
+		TRANSU:
+			position.y = 0
+			if transitionTimer:
+				transitionTimer -= 1
+			else:
+				cameraState = ABOVE
+				transitionTimer = 30
+			
+
+
+func _on_area_2d_mouse_entered():
+	if cameraState == ABOVE:
+		cameraState = TRANSD
+	elif cameraState == BELOW:
+		cameraState = TRANSU
+		

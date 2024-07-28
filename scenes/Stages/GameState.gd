@@ -1,5 +1,6 @@
 extends Node
 
+# Env variables
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,5 +10,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
+	# Check for quit game
 	if( Input.is_action_pressed("Quit")):
 		get_tree().quit()
+		
+	
+
