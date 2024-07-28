@@ -16,7 +16,7 @@ func _ready():
 func _process(delta):
 	
 	# Follow cursor
-	position.x = (-pow((180-cursor.global_position.x), 3))/100000
+	position.x  = cursor.global_position.x/9
 	
 	# Bahavior based on cameraState
 	match cameraState:
