@@ -30,13 +30,14 @@ func _process(delta):
 		
 	# If currently grabbed, follow cursor
 	if grabbed:
+		lock_rotation = false
 		rotation = lerp(rotation,rotTar,0.2) 
 		position.x = get_global_mouse_position().x
 		position.y = get_global_mouse_position().y
 		freeze = true
 	else:
 		freeze = false
-		
+		lock_rotation = true
 		
 	# Update pouring
 	if grabbed && Input.is_action_pressed("Right-Click"):
@@ -47,7 +48,8 @@ func _process(delta):
 	# Pour Sound
 	if grabbed && Input.is_action_just_pressed("Right-Click"):
 		pourSound.play()
-	if grabbed && Input.is_action_just_released("Right-Click"):
+	if Input.is_action_just_released("Right-Click"):
+		rotation = 0
 		pourSound.stop()
 		
 	# Update rotation target
