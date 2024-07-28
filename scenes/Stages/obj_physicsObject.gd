@@ -5,10 +5,12 @@ var canGrab = false
 var grabbed = false
 var pouring = false
 var rotTar = 0.0
+var liquidTimer = 1
 
 @onready var collideSound = $CollideSound
 @onready var pourSound = $PourSound
 @onready var collision = $Collision
+var liquid = preload("res://scenes/Objects/Liquids/obj_liquid_particle.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -52,7 +54,16 @@ func _process(delta):
 		
 	# Update rotation target
 	if pouring:
-		rotTar = deg_to_rad(45)
+		rotTar = deg_to_rad(45+90)
+		liquidTimer -= 1
+		
+		# Emit liquid particles
+		if liquidTimer <= 0 && rotation >= deg_to_rad(30):
+			var newLiquid = liquid.instantiate()
+			newLiquid.position = self.position + Vector2(0,-1).rotated(self.rotation)*27
+			get_parent().add_child(newLiquid)
+			liquidTimer = 1
+			
 	else:
 		rotTar = 0.0
 		

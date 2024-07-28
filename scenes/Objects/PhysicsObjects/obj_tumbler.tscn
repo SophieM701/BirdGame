@@ -1,18 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://btowy5invv8dt"]
+[gd_scene load_steps=7 format=3 uid="uid://btowy5invv8dt"]
 
 [ext_resource type="Script" path="res://scenes/Stages/obj_physicsObject.gd" id="1_dr4qb"]
 [ext_resource type="AudioStream" uid="uid://cxpesanb1h1da" path="res://Assets/Sounds/sou.settingdown.mp3" id="2_e4yjj"]
 [ext_resource type="Texture2D" uid="uid://dvrchwd8l8b6a" path="res://Assets/Sprites/Ingredients/spr_tumbler.png" id="2_qfl5l"]
 [ext_resource type="AudioStream" uid="uid://jl8u7djl7b8b" path="res://Assets/Sounds/sou.risinggulp.mp3" id="4_ypd06"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v8uq"]
+size = Vector2(22, 8)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hu75"]
 size = Vector2(16, 24)
 
-[node name="obj_tumbler" type="RigidBody2D"]
+[node name="obj_tumbler" type="RigidBody2D" groups=["liquidCatcher"]]
 position = Vector2(2, -1)
-mass = 0.14
 contact_monitor = true
 script = ExtResource("1_dr4qb")
+
+[node name="liquidCatcher" type="Area2D" parent="." groups=["liquidCatcher"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="liquidCatcher"]
+position = Vector2(-2, -12)
+shape = SubResource("RectangleShape2D_7v8uq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_qfl5l")

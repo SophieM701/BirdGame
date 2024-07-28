@@ -9,7 +9,6 @@
 size = Vector2(12, 26)
 
 [node name="obj_physicsObject" type="RigidBody2D"]
-mass = 0.14
 contact_monitor = true
 script = ExtResource("1_nlcvv")
 

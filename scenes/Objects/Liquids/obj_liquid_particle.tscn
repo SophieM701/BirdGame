@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cycumoqkbl50h"]
+[gd_scene load_steps=3 format=3 uid="uid://cycumoqkbl50h"]
+
+[ext_resource type="Script" path="res://scenes/Objects/Liquids/obj_liquid_particle.gd" id="1_kdyne"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1gra"]
 size = Vector2(2, 2)
 
 [node name="LiquidParticle" type="RigidBody2D"]
+mass = 0.03
+script = ExtResource("1_kdyne")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 2.0
@@ -13,3 +17,5 @@ color = Color(1, 0.572549, 0.737255, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_m1gra")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
