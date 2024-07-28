@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://5r2d250na1ck"
+path="res://.godot/imported/playsound _glassding.mp3-bc505bf7060485442456b85b3d02e5ff.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/playsound _glassding.mp3"
+dest_files=["res://.godot/imported/playsound _glassding.mp3-bc505bf7060485442456b85b3d02e5ff.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

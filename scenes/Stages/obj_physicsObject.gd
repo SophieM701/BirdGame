@@ -30,9 +30,9 @@ func _process(delta):
 	if grabbed:
 		position.x = get_global_mouse_position().x
 		position.y = get_global_mouse_position().y
-		#collision.disabled = true
-	#else:
-		#collision.disabled = false
+		freeze = true
+	else:
+		freeze = false
 
 # Play sound on collision
 func _on_body_entered(body):

@@ -1,17 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://vucuskvn41mq"]
+[gd_scene load_steps=7 format=3 uid="uid://vucuskvn41mq"]
 
-[ext_resource type="Texture2D" uid="uid://dtygugdsuk1cp" path="res://Assets/Sprites/Cursor/spr_temp_csr.png" id="1_5j64b"]
+[ext_resource type="Texture2D" uid="uid://bkyv6cev35ky1" path="res://Assets/Sprites/Cursor/Cursor-Sheet.png" id="1_3sf0d"]
 [ext_resource type="Script" path="res://scenes/Objects/Cursor/Cursor.gd" id="2_2iek5"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jifng"]
-atlas = ExtResource("1_5j64b")
+[sub_resource type="AtlasTexture" id="AtlasTexture_4w52f"]
+atlas = ExtResource("1_3sf0d")
 region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjt2l"]
+atlas = ExtResource("1_3sf0d")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn2tx"]
+atlas = ExtResource("1_3sf0d")
+region = Rect2(16, 0, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mntrh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jifng")
+"texture": SubResource("AtlasTexture_4w52f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjt2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn2tx")
 }],
 "loop": true,
 "name": &"default",

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ceu4nawol6f1y"
+path="res://.godot/imported/playsound _vomit.mp3-206df9c5a97caa181e6c1b5c5e9150d4.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/playsound _vomit.mp3"
+dest_files=["res://.godot/imported/playsound _vomit.mp3-206df9c5a97caa181e6c1b5c5e9150d4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
